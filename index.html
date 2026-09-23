@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="overflow-hidden h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>استودیو معماری و طراحی داخلی مرضیه عباسی | Marzie Abbasi</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Premium Persian Font (Vazirmatn Variable) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" />
+
+  <!-- Luxury Editorial Google Fonts (Syne, Cormorant Garamond, Cinzel, Space Grotesk) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sandBg: '#f6f3ee',         // Warm sand/ivory light backdrop
+            sandSurface: '#ede8df',    // Warm tone surface
+            sandCard: 'rgba(255, 255, 255, 0.72)',
+            bronze: '#b59b73',         // Muted luxury architectural bronze
+            bronzeDark: '#8c7355',
+            bronzeLight: '#d6c4a8',
+            charcoal: '#1e1b18',       // Deep rich architectural ebony
+            charcoalMuted: '#57524c',
+            borderWarm: 'rgba(181, 155, 115, 0.28)'
+          },
+          fontFamily: {
+            sans: ['Vazirmatn', 'sans-serif'],
+            display: ['Cinzel', 'serif'],
+            editorial: ['Cormorant Garamond', 'serif'],
+            modern: ['Syne', 'sans-serif'],
+            mono: ['Space Grotesk', 'monospace']
+          },
+          boxShadow: {
+            'luxury': '0 20px 50px -12px rgba(30, 27, 24, 0.08), 0 0 1px 1px rgba(181, 155, 115, 0.15)',
+            'floating': '0 30px 60px -15px rgba(140, 115, 85, 0.18)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Prevent default document scrolling for absolute shot-by-shot experience */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #f6f3ee;
+      color: #1e1b18;
+      overflow: hidden;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Subtle architectural architectural grid pattern */
+    .grid-lines {
+      background-size: 60px 60px;
+      background-image: 
+        linear-gradient(to right, rgba(181, 155, 115, 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(181, 155, 115, 0.07) 1px, transparent 1px);
+    }
+
+    /* Custom luxury cursor */
+    .custom-cursor {
+      pointer-events: none;
+      transition: transform 0.12s cubic-bezier(0.19, 1, 0.22, 1), width 0.25s ease, height 0.25s ease, border-color 0.2s ease;
+      z-index: 99999;
+    }
+
+    /* Shot Master Stages */
+    .shot-container {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.85s ease;
+      transform: scale(0.96) translateY(30px);
+      filter: blur(8px);
+    }
+    .shot-container.active-shot {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: scale(1) translateY(0px);
+      filter: blur(0px);
+    }
+
+    /* Stagger child animation utilities */
+    .active-shot .stagger-1 { transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s; opacity: 1; transform: translateY(0); }
+    .active-shot .stagger-2 { transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.30s; opacity: 1; transform: translateY(0); }
+    .active-shot .stagger-3 { transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.45s; opacity: 1; transform: translateY(0); }
+    .active-shot .stagger-4 { transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.60s; opacity: 1; transform: translateY(0); }
+
+    .stagger-init {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    /* Custom Slider Handle for Shot 2 */
+    .slider-track {
+      touch-action: none;
+    }
+
+    /* Glass Panels */
+    .editorial-glass {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(181, 155, 115, 0.28);
+    }
+
+    /* Editorial Outline Typography */
+    .stroke-title {
+      -webkit-text-stroke: 1.2px #1e1b18;
+      color: transparent;
+    }
+  </style>
+</head>
+
+<body class="grid-lines text-charcoal h-full w-full relative">
+
+  <!-- Custom Architectural Pointer -->
+  <div id="cursorCenter" class="custom-cursor fixed top-0 left-0 w-2.5 h-2.5 bg-bronze rounded-full -translate-x-1/2 -translate-y-1/2 hidden md:block"></div>
+  <div id="cursorRing" class="custom-cursor fixed top-0 left-0 w-10 h-10 border border-bronze/60 rounded-full -translate-x-1/2 -translate-y-1/2 hidden md:block"></div>
+
+  <!-- Top Floating Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-6 sm:px-12 py-5 flex items-center justify-between pointer-events-auto">
+    <!-- Brand / Architect Monogram -->
+    <div class="flex items-center gap-4 cursor-pointer" onclick="goToShot(0)">
+      <div class="w-11 h-11 rounded-full border border-bronze/50 bg-sandSurface flex items-center justify-center font-display font-bold text-bronzeDark text-sm tracking-widest shadow-sm">
+        MA
+      </div>
+      <div>
+        <h1 class="text-xs sm:text-sm font-bold tracking-tight text-charcoal">مرضیه عباسی</h1>
+        <span class="block text-[10px] font-mono text-bronze tracking-wider uppercase">Architect & Interior Director</span>
+      </div>
+    </div>
+
+    <!-- Center Stage Label -->
+    <div class="hidden md:flex items-center gap-2 px-4 py-1.5 rounded-full editorial-glass text-[11px] font-mono text-charcoalMuted shadow-sm">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span id="currentShotTitleHeader">SHOT 01 / THE ARCHITECTURAL STATEMENT</span>
+      <span class="text-bronze/40">•</span>
+      <span id="liveTimeClock" class="font-mono">تهران --:--</span>
+    </div>
+
+    <!-- Navigation Actions -->
+    <div class="flex items-center gap-3">
+      <!-- Critique Toggle Button -->
+      <button onclick="toggleCritiqueModal()" class="px-3.5 py-1.5 rounded-full border border-bronze/40 bg-sandBg/80 text-[11px] text-bronzeDark hover:bg-bronze hover:text-white transition-all font-medium flex items-center gap-1.5 shadow-sm">
+        <i class="fa-solid fa-feather-pointed"></i>
+        <span>نقد کانسپت و متدولوژی</span>
+      </button>
+
+      <!-- Sound Ambient Toggle (Web Audio API) -->
+      <button id="soundToggleBtn" onclick="toggleAmbience()" class="w-9 h-9 rounded-full border border-bronze/30 bg-sandBg/90 flex items-center justify-center text-xs text-charcoal hover:border-bronze transition-all" title="پخش آمبیانس آکوستیک فضا">
+        <i id="soundIcon" class="fa-solid fa-volume-xmark"></i>
+      </button>
+
+      <!-- Consultation CTA -->
+      <button onclick="goToShot(4)" class="hidden sm:inline-flex px-5 py-2 rounded-full bg-charcoal text-sandBg text-xs font-medium hover:bg-bronzeDark transition-all duration-300 shadow-md">
+        <span>رزرو طراحی</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Vertical Scrollytelling Indicators (Right-Hand Screen Nav) -->
+  <aside class="fixed right-6 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-5 pointer-events-auto">
+    <div class="text-[10px] font-mono text-bronze rotate-90 origin-right translate-x-2 mb-4 tracking-widest hidden sm:block">
+      SCROLL TO EXPLORE
+    </div>
+    
+    <div class="flex flex-col gap-3">
+      <button onclick="goToShot(0)" class="shot-nav-btn group flex items-center gap-3 focus:outline-none" data-index="0">
+        <span class="nav-label hidden sm:block text-[10px] font-mono uppercase text-charcoalMuted opacity-0 group-hover:opacity-100 transition-opacity">01 • پرده نخست</span>
+        <span class="indicator-bar w-2 h-2 rounded-full border border-bronze transition-all duration-500 bg-bronze scale-125"></span>
+      </button>
+      <button onclick="goToShot(1)" class="shot-nav-btn group flex items-center gap-3 focus:outline-none" data-index="1">
+        <span class="nav-label hidden sm:block text-[10px] font-mono uppercase text-charcoalMuted opacity-0 group-hover:opacity-100 transition-opacity">02 • لنز بازسازی</span>
+        <span class="indicator-bar w-2 h-2 rounded-full border border-bronze transition-all duration-500 bg-transparent"></span>
+      </button>
+      <button onclick="goToShot(2)" class="shot-nav-btn group flex items-center gap-3 focus:outline-none" data-index="2">
+        <span class="nav-label hidden sm:block text-[10px] font-mono uppercase text-charcoalMuted opacity-0 group-hover:opacity-100 transition-opacity">03 • متریال و بافت</span>
+        <span class="indicator-bar w-2 h-2 rounded-full border border-bronze transition-all duration-500 bg-transparent"></span>
+      </button>
+      <button onclick="goToShot(3)" class="shot-nav-btn group flex items-center gap-3 focus:outline-none" data-index="3">
+        <span class="nav-label hidden sm:block text-[10px] font-mono uppercase text-charcoalMuted opacity-0 group-hover:opacity-100 transition-opacity">04 • پروژه‌های برتر</span>
+        <span class="indicator-bar w-2 h-2 rounded-full border border-bronze transition-all duration-500 bg-transparent"></span>
+      </button>
+      <button onclick="goToShot(4)" class="shot-nav-btn group flex items-center gap-3 focus:outline-none" data-index="4">
+        <span class="nav-label hidden sm:block text-[10px] font-mono uppercase text-charcoalMuted opacity-0 group-hover:opacity-100 transition-opacity">05 • برآورد و مشاوره</span>
+        <span class="indicator-bar w-2 h-2 rounded-full border border-bronze transition-all duration-500 bg-transparent"></span>
+      </button>
+    </div>
+
+    <!-- Active Shot Mini Counter -->
+    <div class="mt-4 text-[11px] font-mono text-bronzeDark font-bold" id="shotFractionDisplay">
+      01 / 05
+    </div>
+  </aside>
+
+  <!-- Bottom Wheel Hint Animation -->
+  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2 pointer-events-none opacity-80 transition-opacity" id="scrollTip">
+    <span class="text-[10px] font-mono tracking-widest text-charcoalMuted uppercase">چرخش رول ماوس برای ورود به شات بعدی</span>
+    <div class="w-5 h-8 rounded-full border border-bronze/50 flex justify-center pt-1.5">
+      <div class="w-1 h-2 bg-bronze rounded-full animate-bounce"></div>
+    </div>
+  </div>
+
+  <!-- MAIN SCROLL-DRIVEN STAGE VIEWPORT -->
+  <main id="shotsViewport" class="relative w-full h-full">
+
+    <!-- SHOT 1: THE HERO CANVAS & MANIFESTO -->
+    <section class="shot-container active-shot flex items-center justify-center px-6 sm:px-14 lg:px-20" data-shot="0">
+      <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        
+        <!-- Left / Start Column: Editorial Statement -->
+        <div class="lg:col-span-7 space-y-6 text-right">
+          <div class="stagger-init stagger-1 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-bronze/30 bg-sandSurface text-bronzeDark text-xs font-mono">
+            <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
+            <span>پایه ۲ نظام مهندسی • ارشد معماری و طراحی داخلی</span>
+          </div>
+
+          <div class="space-y-2 stagger-init stagger-2">
+            <span class="block font-display tracking-widest text-sm text-bronze uppercase">MARZIE ABBASI ATELIER</span>
+            <h2 class="text-4xl sm:text-6xl xl:text-7xl font-bold tracking-tight text-charcoal leading-[1.12]">
+              طراحی که <span class="font-editorial italic font-normal text-bronzeDark">معنای فضا</span> را دوباره می‌نگارد.
+            </h2>
+            <div class="font-modern font-black text-2xl sm:text-3xl text-charcoal/20 tracking-wider">
+              DESIGN THAT DEFINES YOUR SPACE
+            </div>
+          </div>
+
+          <p class="stagger-init stagger-3 text-charcoalMuted text-sm sm:text-base leading-relaxed max-w-xl font-light">
+            ما پروژه‌ها را فراتر از چیدمان سطحی درک می‌کنیم. با ادغام هندسه نور طبیعی، خلوص متریال و مدیریت مهندسی هزینه‌ها در تهران، رویاهای زیستی شما به آثاری بی‌بدیل و آرامش‌بخش بدل می‌شوند.
+          </p>
+
+          <div class="stagger-init stagger-4 flex flex-wrap items-center gap-4 pt-2">
+            <button onclick="goToShot(1)" class="px-7 py-3.5 rounded-full bg-bronzeDark text-sandBg text-xs font-medium hover:bg-charcoal transition-all shadow-luxury flex items-center gap-2">
+              <span>ورود به شات ترنسفورمیشن بازسازی</span>
+              <i class="fa-solid fa-arrow-left text-[10px]"></i>
+            </button>
+            <div class="flex items-center gap-3 text-xs text-charcoalMuted border-r-2 border-bronze/30 pr-4">
+              <span class="font-mono font-bold text-bronzeDark text-sm">۱۰۸k+</span>
+              <span>همراهان در شبکه‌های اجتماعی</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Sculptural Architectural Composition with 3D Tilt -->
+        <div class="lg:col-span-5 relative stagger-init stagger-3">
+          <div id="heroCard3D" class="relative rounded-3xl overflow-hidden shadow-floating border border-borderWarm editorial-glass p-3 transition-transform duration-300">
+            <div class="relative h-[380px] sm:h-[460px] rounded-2xl overflow-hidden group">
+              <img 
+                src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80" 
+                alt="Contemporary Living Space" 
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent"></div>
+              
+              <!-- Floating Badge -->
+              <div class="absolute bottom-5 right-5 left-5 p-4 rounded-xl editorial-glass flex items-center justify-between">
+                <div>
+                  <div class="text-[10px] font-mono text-bronze uppercase">پروژه منتخب سال</div>
+                  <div class="text-xs font-bold text-charcoal">پنت‌هاوس مدرن نیاوران • ۳۲۰ مترمربع</div>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-bronze/20 text-bronzeDark flex items-center justify-center text-xs">
+                  <i class="fa-solid fa-compass-drafting"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Decorative Stamp -->
+          <div class="absolute -top-4 -right-4 w-20 h-20 rounded-full border border-dashed border-bronze/50 flex items-center justify-center p-2 text-center pointer-events-none rotate-12">
+            <span class="text-[9px] font-mono text-bronzeDark uppercase tracking-tighter">TEHRAN ARCHITECTURE</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SHOT 2: SPATIAL TRANSFORMATION BEFORE / AFTER LENS -->
+    <section class="shot-container flex items-center justify-center px-6 sm:px-14 lg:px-20" data-shot="1">
+      <div class="max-w-6xl w-full space-y-6">
+        
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-borderWarm pb-4">
+          <div class="stagger-init stagger-1">
+            <span class="text-xs font-mono text-bronze uppercase tracking-widest">// SHOT 02 • TRANSFORMATION LENS</span>
+            <h2 class="text-2xl sm:text-4xl font-bold text-charcoal mt-1">
+              دگردیسی کالبدی: <span class="font-editorial italic text-bronzeDark">از فرسودگی تا شکوه</span>
+            </h2>
+          </div>
+          <p class="stagger-init stagger-2 text-xs text-charcoalMuted max-w-md">
+            ما با تخریب مهندسی‌شده و تقویت سازه، فضاهای نامتقارن را به شاهکاری منسجم تبدیل می‌کنیم. خط میانی را با ماوس یا لمس به طرفین بکشید:
+          </p>
+        </div>
+
+        <!-- The Interactive Curtain Slider -->
+        <div class="stagger-init stagger-3 relative rounded-3xl overflow-hidden border border-borderWarm editorial-glass p-3 shadow-floating">
+          <div id="shot2SliderContainer" class="slider-track relative w-full h-[360px] sm:h-[460px] rounded-2xl overflow-hidden select-none cursor-ew-resize">
+            
+            <!-- AFTER IMAGE (Underneath) -->
+            <img 
+              src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=80" 
+              alt="Completed Luxury Interior" 
+              class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            />
+            <div class="absolute top-4 left-4 z-10 px-3 py-1.5 rounded-lg editorial-glass text-[11px] font-mono text-charcoal font-semibold shadow-sm">
+              ✨ AFTER: تکمیل بازسازی و فرنیش لوکس (پاسداران)
+            </div>
+
+            <!-- BEFORE IMAGE (Clipped Layer) -->
+            <div id="shot2ClippedLayer" class="absolute inset-y-0 right-0 w-1/2 overflow-hidden border-l-2 border-bronze shadow-2xl bg-sandBg">
+              <img 
+                src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1400&q=80" 
+                alt="Before Construction" 
+                class="absolute inset-0 w-[800px] sm:w-[1100px] max-w-none h-full object-cover pointer-events-none filter sepia-[0.35] contrast-105"
+              />
+              <div class="absolute top-4 right-4 z-10 px-3 py-1.5 rounded-lg editorial-glass text-[11px] font-mono text-charcoalMuted shadow-sm">
+                🏚️ BEFORE: بافت اولیه فرسوده پیش از تخریب
+              </div>
+            </div>
+
+            <!-- Draggable Interactive Handle Bar -->
+            <div id="shot2Handle" class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1 bg-bronze flex items-center justify-center cursor-ew-resize z-20">
+              <div class="w-10 h-10 rounded-full bg-sandBg border-2 border-bronze shadow-2xl flex items-center justify-center text-bronzeDark text-xs gap-1">
+                <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                <i class="fa-solid fa-chevron-left text-[9px]"></i>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Metric Bar -->
+          <div class="mt-3 px-4 py-2.5 rounded-xl bg-sandSurface/80 flex flex-wrap items-center justify-between text-xs text-charcoalMuted font-mono">
+            <span class="flex items-center gap-1.5">
+              <i class="fa-solid fa-ruler-combined text-bronze"></i>
+              <span>متراژ پروژه: ۱۹۵ مترمربع</span>
+            </span>
+            <span>بازه زمانی اجرا: <strong>۵۵ روز تقویمی</strong></span>
+            <span class="text-bronzeDark font-bold">بازگشت سرمایه تخمینی: +۳۸٪ ارزش افزوده ملکی</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SHOT 3: MATERIALITY & TACTILE CURATION -->
+    <section class="shot-container flex items-center justify-center px-6 sm:px-14 lg:px-20" data-shot="2">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Left: Material Selectors & Curation Philosophy -->
+        <div class="lg:col-span-5 space-y-5 text-right">
+          <div class="stagger-init stagger-1">
+            <span class="text-xs font-mono text-bronze uppercase tracking-widest">// SHOT 03 • TACTILE LAB</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-charcoal mt-1">
+              وسواس در <span class="font-editorial italic text-bronzeDark">انتخاب متریال</span> اصیل
+            </h2>
+            <p class="text-xs sm:text-sm text-charcoalMuted mt-2 leading-relaxed">
+              متریال‌ها صدای خاموش فضا هستند. با کلیک روی هر متریال، ترکیب نوری و بافت کالبدی آن را در شبیه‌ساز زنده بررسی نمایید:
+            </p>
+          </div>
+
+          <!-- Material Interactive Switches -->
+          <div class="stagger-init stagger-2 space-y-2.5" id="materialTabList">
+            <button onclick="switchMaterial(0)" class="mat-tab active-mat w-full p-3.5 rounded-2xl editorial-glass border border-bronze text-right flex items-center justify-between transition-all">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-[#e8e6e1] border border-bronze/40 shadow-inner"></span>
+                <div>
+                  <div class="text-xs font-bold text-charcoal">سنگ کلکته بوک‌مچ ایتالیایی</div>
+                  <div class="text-[10px] font-mono text-bronzeDark">Calacatta Borghini Slab</div>
+                </div>
+              </div>
+              <i class="fa-solid fa-eye text-xs text-bronze"></i>
+            </button>
+
+            <button onclick="switchMaterial(1)" class="mat-tab w-full p-3.5 rounded-2xl editorial-glass border border-transparent hover:border-bronze/40 text-right flex items-center justify-between transition-all">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-[#523d2e] border border-bronze/40 shadow-inner"></span>
+                <div>
+                  <div class="text-xs font-bold text-charcoal">چوب گردوی آمریکایی با فینیش مات</div>
+                  <div class="text-[10px] font-mono text-charcoalMuted">Smoked American Walnut</div>
+                </div>
+              </div>
+              <i class="fa-solid fa-eye text-xs text-charcoalMuted"></i>
+            </button>
+
+            <button onclick="switchMaterial(2)" class="mat-tab w-full p-3.5 rounded-2xl editorial-glass border border-transparent hover:border-bronze/40 text-right flex items-center justify-between transition-all">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-[#c9ab7b] border border-bronze/40 shadow-inner"></span>
+                <div>
+                  <div class="text-xs font-bold text-charcoal">برنج برس‌خورده اکسپوز شامپاینی</div>
+                  <div class="text-[10px] font-mono text-charcoalMuted">Brushed Champagne Brass</div>
+                </div>
+              </div>
+              <i class="fa-solid fa-eye text-xs text-charcoalMuted"></i>
+            </button>
+
+            <button onclick="switchMaterial(3)" class="mat-tab w-full p-3.5 rounded-2xl editorial-glass border border-transparent hover:border-bronze/40 text-right flex items-center justify-between transition-all">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-[#9c978e] border border-bronze/40 shadow-inner"></span>
+                <div>
+                  <div class="text-xs font-bold text-charcoal">میکروسمنت مینیمال پیوسته</div>
+                  <div class="text-[10px] font-mono text-charcoalMuted">Seamless Warm Microcement</div>
+                </div>
+              </div>
+              <i class="fa-solid fa-eye text-xs text-charcoalMuted"></i>
+            </button>
+          </div>
+
+          <!-- Color Temperature Filter Switcher -->
+          <div class="stagger-init stagger-3 pt-2 border-t border-borderWarm flex items-center justify-between text-xs">
+            <span class="text-charcoalMuted font-mono">شبیه‌سازی دمای رنگ نور:</span>
+            <div class="flex items-center gap-2">
+              <button onclick="setLightKelvin('warm')" id="btnKelvinWarm" class="px-3 py-1 rounded-full bg-bronze text-white text-[11px] font-mono">2700K Warm</button>
+              <button onclick="setLightKelvin('natural')" id="btnKelvinNatural" class="px-3 py-1 rounded-full bg-sandSurface text-charcoal text-[11px] font-mono">4000K Neutral</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Dynamic Material Visualizer Canvas -->
+        <div class="lg:col-span-7 stagger-init stagger-2">
+          <div class="relative rounded-3xl overflow-hidden border border-borderWarm editorial-glass p-3 shadow-floating">
+            <div id="matRenderFrame" class="relative h-[380px] sm:h-[440px] rounded-2xl overflow-hidden transition-all duration-700">
+              <img 
+                id="matStageImage" 
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1100&q=80" 
+                alt="Material Texture Applied" 
+                class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              />
+              <div id="lightingOverlay" class="absolute inset-0 bg-amber-500/10 pointer-events-none transition-colors duration-500"></div>
+
+              <!-- Information Card pinned on image -->
+              <div class="absolute bottom-5 right-5 left-5 p-4 rounded-xl editorial-glass border border-borderWarm space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <span id="matCardCategory" class="text-[10px] font-mono text-bronze uppercase">سنگ اسلب طبیعی وارداتی</span>
+                  <span id="matCardCode" class="text-[10px] font-mono text-charcoalMuted">IT-CAL-2026</span>
+                </div>
+                <h4 id="matCardTitle" class="text-sm font-bold text-charcoal">سنگ کلکته بورگینی با رگه‌بندی طلایی و خاکستری</h4>
+                <p id="matCardDesc" class="text-[11px] text-charcoalMuted leading-relaxed">
+                  ایجاد نقطه کانونی در جزیره آشپزخانه و وال‌کاورینگ سالن پذیرایی، مقاوم در برابر سایش با پولیش نیمه‌مات ابریشمی.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SHOT 4: INTERACTIVE FEATURED PROJECTS GALLERY -->
+    <section class="shot-container flex items-center justify-center px-6 sm:px-14 lg:px-20" data-shot="3">
+      <div class="max-w-6xl w-full space-y-6">
+        
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-borderWarm pb-4">
+          <div class="stagger-init stagger-1">
+            <span class="text-xs font-mono text-bronze uppercase tracking-widest">// SHOT 04 • PORTFOLIO CATALOG</span>
+            <h2 class="text-2xl sm:text-4xl font-bold text-charcoal mt-1">
+              پروژه‌های شاخص <span class="font-editorial italic text-bronzeDark">معماری و دکوراسیون</span>
+            </h2>
+          </div>
+          <div class="stagger-init stagger-2 flex items-center gap-2">
+            <button onclick="changeGallerySlide(-1)" class="w-9 h-9 rounded-full border border-borderWarm editorial-glass flex items-center justify-center hover:bg-bronze hover:text-white transition-all">
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+            <button onclick="changeGallerySlide(1)" class="w-9 h-9 rounded-full border border-borderWarm editorial-glass flex items-center justify-center hover:bg-bronze hover:text-white transition-all">
+              <i class="fa-solid fa-chevron-left text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3-Card Carousel/Grid with Dynamic Flip Detail -->
+        <div class="stagger-init stagger-3 grid grid-cols-1 md:grid-cols-3 gap-6" id="projectsTrack">
+          
+          <!-- Card 1 -->
+          <div class="group relative rounded-3xl overflow-hidden border border-borderWarm editorial-glass p-3 shadow-floating hover:-translate-y-2 transition-all duration-500">
+            <div class="relative h-64 rounded-2xl overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=700&q=80" alt="Farmanieh Penthouse" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-mono editorial-glass text-charcoal font-semibold">پاسداران • تهران</span>
+            </div>
+            <div class="p-3 space-y-1.5">
+              <h3 class="text-sm font-bold text-charcoal group-hover:text-bronzeDark transition-colors">بازسازی کامل واحد ۲۶۰ متری</h3>
+              <p class="text-xs text-charcoalMuted">ترکیب کابینت‌های انزو پلی‌اورتان و فضای تفکیک‌شده لاندری و نشیمن خصوصی.</p>
+              <div class="pt-2 flex justify-between items-center text-[10px] font-mono text-bronzeDark border-t border-borderWarm">
+                <span>سبک: مدرن مینیمال</span>
+                <span>سال: ۱۴۰۴</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="group relative rounded-3xl overflow-hidden border border-borderWarm editorial-glass p-3 shadow-floating hover:-translate-y-2 transition-all duration-500">
+            <div class="relative h-64 rounded-2xl overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=80" alt="Lavasan Villa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-mono editorial-glass text-charcoal font-semibold">لواسان • ویلایی</span>
+            </div>
+            <div class="p-3 space-y-1.5">
+              <h3 class="text-sm font-bold text-charcoal group-hover:text-bronzeDark transition-colors">طراحی ویلای صخره‌ای و استخر شیشه‌ای</h3>
+              <p class="text-xs text-charcoalMuted">پنجره‌های تمام‌قد ترمال‌بریک و پیوند بی‌واسطه سالن پذیرایی با لنداسکیپ باغ.</p>
+              <div class="pt-2 flex justify-between items-center text-[10px] font-mono text-bronzeDark border-t border-borderWarm">
+                <span>متراژ: ۶۸۰ مترمربع</span>
+                <span>فاز ۱ و ۲ اجرایی</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="group relative rounded-3xl overflow-hidden border border-borderWarm editorial-glass p-3 shadow-floating hover:-translate-y-2 transition-all duration-500">
+            <div class="relative h-64 rounded-2xl overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=80" alt="Executive Suite" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-mono editorial-glass text-charcoal font-semibold">جردن • اداری لوکس</span>
+            </div>
+            <div class="p-3 space-y-1.5">
+              <h3 class="text-sm font-bold text-charcoal group-hover:text-bronzeDark transition-colors">هولدینگ سرمایه‌گذاری و مسترآفیس</h3>
+              <p class="text-xs text-charcoalMuted">پارتیشن‌های شیشه‌ای دوجداره هوشمند با عایق‌بندی آکوستیک ۴۲ دسی‌بل.</p>
+              <div class="pt-2 flex justify-between items-center text-[10px] font-mono text-bronzeDark border-t border-borderWarm">
+                <span>متراژ: ۳۱۰ مترمربع</span>
+                <span>فرنیش اداری کاستوم</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SHOT 5: ESTIMATION & DIRECT VIP CONSULTATION -->
+    <section class="shot-container flex items-center justify-center px-6 sm:px-14 lg:px-20" data-shot="4">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Left Column: Architect Bio & Direct Contact Strip -->
+        <div class="lg:col-span-5 space-y-5 text-right stagger-init stagger-1">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-borderWarm bg-sandSurface text-xs font-mono text-bronzeDark">
+            <i class="fa-solid fa-id-card"></i>
+            <span>درباره مهندس مرضیه عباسی</span>
+          </div>
+
+          <h2 class="text-2xl sm:text-4xl font-bold text-charcoal">
+            مشاوره مستقیم با <br />
+            <span class="font-editorial italic text-bronzeDark">طراح ارشد و ناظر مقیم</span>
+          </h2>
+
+          <p class="text-xs sm:text-sm text-charcoalMuted leading-relaxed">
+            سرکار خانم مهندس مرضیه عباسی (پایه ۲ سازمان نظام مهندسی تهران و کارشناس ارشد معماری)، کلیه مراحل از ایده‌پردازی اولیه تا تحویل نهایی کلید را تحت قرارداد شفاف مدیریت پیمان به عهده می‌گیرند.
+          </p>
+
+          <div class="space-y-2 pt-1 font-mono text-xs">
+            <a href="tel:09120338134" class="p-3 rounded-2xl editorial-glass border border-borderWarm flex items-center justify-between hover:bg-sandSurface transition-colors">
+              <span class="text-charcoalMuted">تماس مستقیم مهندسی:</span>
+              <span class="font-bold text-bronzeDark font-mono" dir="ltr">0912 033 8134</span>
+            </a>
+            <a href="https://instagram.com/marzie__abbasi" target="_blank" class="p-3 rounded-2xl editorial-glass border border-borderWarm flex items-center justify-between hover:bg-sandSurface transition-colors">
+              <span class="text-charcoalMuted">صفحه رسمی اینستاگرام:</span>
+              <span class="font-bold text-pink-600 font-mono" dir="ltr">@marzie__abbasi</span>
+            </a>
+            <div class="p-3 rounded-2xl editorial-glass border border-borderWarm flex items-center justify-between">
+              <span class="text-charcoalMuted">موقعیت دفتر و آتلیه:</span>
+              <span class="text-charcoal font-sans text-[11px]">تهران، پاسداران، آتلیه طراحی</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Realtime Renovation Cost Estimator -->
+        <div class="lg:col-span-7 stagger-init stagger-2">
+          <div class="rounded-3xl border border-borderWarm editorial-glass p-6 sm:p-8 shadow-floating space-y-6">
+            <div class="border-b border-borderWarm pb-3 flex items-center justify-between">
+              <div>
+                <h3 class="text-base font-bold text-charcoal">محاسبه‌گر هوشمند بازسازی و طراحی</h3>
+                <p class="text-[11px] text-charcoalMuted">تخمین بودجه مهندسی بر اساس مترمربع و سطح پروژه</p>
+              </div>
+              <span class="w-8 h-8 rounded-full bg-bronze/20 text-bronzeDark flex items-center justify-center text-xs">
+                <i class="fa-solid fa-calculator"></i>
+              </span>
+            </div>
+
+            <!-- Area Slider -->
+            <div>
+              <div class="flex justify-between items-center mb-1 text-xs">
+                <span class="font-mono text-charcoalMuted">متراژ زیربنای فضا:</span>
+                <span id="shot5AreaDisplay" class="font-bold text-bronzeDark font-mono text-sm">۱۶۰ مترمربع</span>
+              </div>
+              <input 
+                type="range" 
+                id="shot5AreaRange" 
+                min="50" 
+                max="600" 
+                value="160" 
+                step="10" 
+                oninput="calcEstimate()"
+                class="w-full accent-bronze bg-sandSurface h-2 rounded-lg cursor-pointer"
+              />
+            </div>
+
+            <!-- Scope Choice -->
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" onclick="setScope('full', this)" class="scope-btn p-3 rounded-2xl border border-bronze bg-bronze/10 text-center text-xs font-bold text-charcoal transition-all">
+                <span class="block mb-1 text-base">💎</span>
+                <span>بازسازی کامل و فرنیش</span>
+              </button>
+              <button type="button" onclick="setScope('mid', this)" class="scope-btn p-3 rounded-2xl border border-borderWarm bg-sandBg/50 text-center text-xs text-charcoalMuted transition-all">
+                <span class="block mb-1 text-base">🔨</span>
+                <span>نوسازی پوسته و کابینت</span>
+              </button>
+              <button type="button" onclick="setScope('design', this)" class="scope-btn p-3 rounded-2xl border border-borderWarm bg-sandBg/50 text-center text-xs text-charcoalMuted transition-all">
+                <span class="block mb-1 text-base">📐</span>
+                <span>فقط طراحی ۳D و پلان</span>
+              </button>
+            </div>
+
+            <!-- Dynamic Result Card -->
+            <div class="p-4 rounded-2xl bg-sandSurface/80 border border-borderWarm grid grid-cols-2 gap-4 text-center">
+              <div>
+                <span class="block text-[10px] font-mono text-charcoalMuted uppercase">تخمین بودجه کل پروژه</span>
+                <span id="shot5PriceOut" class="text-sm sm:text-base font-bold font-mono text-bronzeDark">۱.۴ الی ۲.۱ میلیارد تومان</span>
+              </div>
+              <div>
+                <span class="block text-[10px] font-mono text-charcoalMuted uppercase">زمان‌بندی تحویل کلید</span>
+                <span id="shot5TimeOut" class="text-sm sm:text-base font-bold font-mono text-charcoal">۵۰ الی ۶۵ روز کاری</span>
+              </div>
+            </div>
+
+            <!-- Fast Lead Capture -->
+            <form onsubmit="submitLead(event)" class="flex gap-2">
+              <input 
+                type="tel" 
+                id="leadInputPhone" 
+                required 
+                placeholder="شماره تماس جهت دریافت استعلام..." 
+                class="w-full px-4 py-3 rounded-xl bg-sandBg border border-borderWarm text-xs text-charcoal placeholder-charcoalMuted/60 focus:outline-none focus:border-bronze"
+                dir="rtl"
+              />
+              <button type="submit" class="px-6 py-3 rounded-xl bg-charcoal text-sandBg text-xs font-bold hover:bg-bronzeDark transition-all shrink-0">
+                درخواست تماس
+              </button>
+            </form>
+            <div id="leadFeedback" class="hidden text-center text-xs text-emerald-700 font-medium">
+              ✓ درخواست مشاوره شما ثبت شد؛ کارشناسان آتلیه به زودی با شما تماس خواهند گرفت.
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CRITIQUE MODAL DRAWER -->
+  <div id="critiqueModal" class="fixed inset-0 z-50 bg-charcoal/40 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="editorial-glass max-w-2xl w-full rounded-3xl p-6 sm:p-8 border border-borderWarm shadow-2xl space-y-4 max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-borderWarm pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-feather-pointed text-bronze"></i>
+          <h3 class="text-base font-bold text-charcoal">نقد کانسپت و دیزاین سیستم وب‌سایت</h3>
+        </div>
+        <button onclick="toggleCritiqueModal()" class="w-8 h-8 rounded-full border border-borderWarm flex items-center justify-center text-xs text-charcoal hover:bg-sandSurface">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs leading-relaxed text-charcoalMuted text-justify">
+        <p>
+          <strong class="text-charcoal font-sans">۱. تطابق پالت رنگی با هویت بصری معمار (Warm Sand & Bronze):</strong>
+          بر خلاف سبک‌های تیره و تاریک متداول، رنگ شنی و عاجی همراه با برنز مات (#b59b73)، اصالت فضاهای بازسازی‌شده در شمال و شرق تهران (پاسداران، فرمانیه) را بازتاب می‌دهد و حس وسعت و آرامش روان‌شناختی به کارفرما می‌بخشد.
+        </p>
+        <p>
+          <strong class="text-charcoal font-sans">۲. نوآوری Scrollytelling با منطق Shot-by-Shot:</strong>
+          به جای اسکرول خسته‌کننده سنتی، هر گردش ماوس کاربر را به یک «شات سینمایی» با محوریت مشخص (مانیفست، مقایسه قبل/بعد، متریال، پورتفولیو، برآورد بودجه) هدایت می‌کند که بیشترین نرخ تعامل (Engagement Rate) را ایجاد می‌نماید.
+        </p>
+        <p>
+          <strong class="text-charcoal font-sans">۳. تایپوگرافی ادیتوریال مدرن:</strong>
+          هم‌نشینی فونت Vazirmatn در کالبد زبان فارسی و فونت‌های مجله‌ای Cormorant Garamond و Syne، وب‌سایت را از یک صفحه اینستاگرامی ساده به یک استودیو دیزاین صاحب‌سبک ارتقا داده است.
+        </p>
+        <p>
+          <strong class="text-charcoal font-sans">۴. تبدیل مخاطب اینستاگرامی به کارفرمای قطعی:</strong>
+          با قرار دادن محاسبات شفاف بودجه، تاییدیه‌های نظام مهندسی و اسلایدرهای قبل و بعد، اضطراب مالی کارفرمایان قبل از تماس مرتفع می‌شود.
+        </p>
+      </div>
+
+      <div class="pt-2 text-right">
+        <button onclick="toggleCritiqueModal()" class="px-5 py-2 rounded-xl bg-charcoal text-sandBg text-xs font-semibold">
+          متوجه شدم
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- STATE MANAGEMENT ---
+    let currentShot = 0;
+    const totalShots = 5;
+    let isTransitioning = false;
+    let lastWheelTime = 0;
+
+    const shotTitles = [
+      "SHOT 01 / THE ARCHITECTURAL STATEMENT",
+      "SHOT 02 / SPATIAL TRANSFORMATION LENS",
+      "SHOT 03 / TACTILE & MATERIALITY LAB",
+      "SHOT 04 / FEATURED RESIDENTIAL PORTFOLIO",
+      "SHOT 05 / VIP ESTIMATION & CONSULTATION"
+    ];
+
+    const shotContainers = document.querySelectorAll('.shot-container');
+    const navButtons = document.querySelectorAll('.shot-nav-btn');
+    const headerTitle = document.getElementById('currentShotTitleHeader');
+    const fractionDisplay = document.getElementById('shotFractionDisplay');
+
+    // Go to specific shot by index
+    function goToShot(index) {
+      if (index < 0 || index >= totalShots || index === currentShot) return;
+
+      // Update current shot class
+      shotContainers[currentShot].classList.remove('active-shot');
+      currentShot = index;
+      shotContainers[currentShot].classList.add('active-shot');
+
+      // Update Header & Counter
+      if (headerTitle) headerTitle.innerText = shotTitles[currentShot];
+      if (fractionDisplay) fractionDisplay.innerText = `0${currentShot + 1} / 0${totalShots}`;
+
+      // Update navigation indicators
+      navButtons.forEach((btn, idx) => {
+        const bar = btn.querySelector('.indicator-bar');
+        if (idx === currentShot) {
+          bar.classList.add('bg-bronze', 'scale-125');
+          bar.classList.remove('bg-transparent');
+        } else {
+          bar.classList.remove('bg-bronze', 'scale-125');
+          bar.classList.add('bg-transparent');
+        }
+      });
+
+      // Temporary disable hint when moved past shot 1
+      const tip = document.getElementById('scrollTip');
+      if (tip) {
+        tip.style.opacity = (currentShot === 0) ? '0.8' : '0.2';
+      }
+    }
+
+    // Wheel Scroll Hijacking Engine with Debounce & Threshold
+    window.addEventListener('wheel', (e) => {
+      const now = Date.now();
+      if (now - lastWheelTime < 900) return; // Debounce wheel gestures
+
+      if (Math.abs(e.deltaY) > 30) {
+        lastWheelTime = now;
+        if (e.deltaY > 0) {
+          // Scroll Down -> Next Shot
+          if (currentShot < totalShots - 1) {
+            goToShot(currentShot + 1);
+          }
+        } else {
+          // Scroll Up -> Prev Shot
+          if (currentShot > 0) {
+            goToShot(currentShot - 1);
+          }
+        }
+      }
+    }, { passive: true });
+
+    // Keyboard Arrow Controls
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+        if (currentShot < totalShots - 1) goToShot(currentShot + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        if (currentShot > 0) goToShot(currentShot - 1);
+      }
+    });
+
+    // Touch Swipe Gesture for Mobile/Tablet
+    let touchStartY = 0;
+    window.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener('touchend', (e) => {
+      const touchEndY = e.changedTouches[0].clientY;
+      const diffY = touchStartY - touchEndY;
+      if (Math.abs(diffY) > 50) {
+        if (diffY > 0 && currentShot < totalShots - 1) {
+          goToShot(currentShot + 1);
+        } else if (diffY < 0 && currentShot > 0) {
+          goToShot(currentShot - 1);
+        }
+      }
+    }, { passive: true });
+
+    // Custom Cursor Movement
+    const cursorCenter = document.getElementById('cursorCenter');
+    const cursorRing = document.getElementById('cursorRing');
+
+    window.addEventListener('mousemove', (e) => {
+      const { clientX, clientY } = e;
+      if (cursorCenter && cursorRing) {
+        cursorCenter.style.transform = `translate(${clientX}px, ${clientY}px)`;
+        cursorRing.style.transform = `translate(${clientX}px, ${clientY}px)`;
+      }
+    });
+
+    // 3D Parallax Tilt for Shot 1 Hero Card
+    const heroCard = document.getElementById('heroCard3D');
+    if (heroCard) {
+      window.addEventListener('mousemove', (e) => {
+        if (currentShot !== 0) return;
+        const rect = heroCard.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        heroCard.style.transform = `perspective(1000px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg)`;
+      });
+    }
+
+    // Shot 2: Before / After Curtain Slider Dragging
+    const sliderContainer = document.getElementById('shot2SliderContainer');
+    const clippedLayer = document.getElementById('shot2ClippedLayer');
+    const handle = document.getElementById('shot2Handle');
+    let isSliderActive = false;
+
+    function updateSlider(clientX) {
+      if (!sliderContainer) return;
+      const rect = sliderContainer.getBoundingClientRect();
+      let pos = clientX - rect.left;
+      if (pos < 0) pos = 0;
+      if (pos > rect.width) pos = rect.width;
+      const percentage = (pos / rect.width) * 100;
+      
+      clippedLayer.style.width = `${100 - percentage}%`;
+      handle.style.left = `${percentage}%`;
+    }
+
+    sliderContainer?.addEventListener('mousedown', () => isSliderActive = true);
+    window.addEventListener('mouseup', () => isSliderActive = false);
+    window.addEventListener('mousemove', (e) => {
+      if (isSliderActive) updateSlider(e.clientX);
+    });
+
+    sliderContainer?.addEventListener('touchstart', () => isSliderActive = true);
+    window.addEventListener('touchend', () => isSliderActive = false);
+    window.addEventListener('touchmove', (e) => {
+      if (isSliderActive && e.touches[0]) updateSlider(e.touches[0].clientX);
+    });
+
+    // Shot 3: Material Switcher Database
+    const materialData = [
+      {
+        cat: 'سنگ اسلب طبیعی وارداتی',
+        code: 'IT-CAL-2026',
+        title: 'سنگ کلکته بورگینی با رگه‌بندی طلایی و خاکستری',
+        desc: 'ایجاد نقطه کانونی در جزیره آشپزخانه و وال‌کاورینگ سالن پذیرایی، مقاوم در برابر سایش با پولیش نیمه‌مات ابریشمی.',
+        img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1100&q=80'
+      },
+      {
+        cat: 'چوب فرآوری شده ترمو',
+        code: 'US-WLNT-88',
+        title: 'پنل‌های چوب گردوی آمریکایی با بافت خطی',
+        desc: 'گرمابخش سالن اصلی و کلوزت روم‌های مدرن، ترکیب‌شده با نورهای مخفی لاینر ۲۷۰۰ کلوین جهت تفکیک فضایی.',
+        img: 'https://images.unsplash.com/photo-1540518614846-7ede433c4b49?auto=format&fit=crop&w=1100&q=80'
+      },
+      {
+        cat: 'فلزات اکسپوز دکوراتیو',
+        code: 'CH-BRSS-09',
+        title: 'پروفیل‌های برنج مات و آبکاری شامپاینی',
+        desc: 'به‌کارگیری در فریم درب‌های اسلایدینگ، دستگیره‌های سفارشی و لاین‌های تزیینی کناف برای جلوه‌ای از ثروت خاموش.',
+        img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1100&q=80'
+      },
+      {
+        cat: 'پوشش‌های یکپارچه معماری',
+        code: 'SP-MCRO-44',
+        title: 'میکروسمنت پیوسته ضدآب در کف و دیوار',
+        desc: 'حذف کامل درزها، مناسب برای سبک‌های جپندی و مینیمال گرم با احساس وسعت بی‌پایان در سالن نشیمن.',
+        img: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1100&q=80'
+      }
+    ];
+
+    function switchMaterial(idx) {
+      const item = materialData[idx];
+      const tabs = document.querySelectorAll('.mat-tab');
+      tabs.forEach((tab, index) => {
+        if (index === idx) {
+          tab.classList.add('border-bronze', 'bg-bronze/10');
+          tab.classList.remove('border-transparent');
+        } else {
+          tab.classList.remove('border-bronze', 'bg-bronze/10');
+          tab.classList.add('border-transparent');
+        }
+      });
+
+      const img = document.getElementById('matStageImage');
+      const cat = document.getElementById('matCardCategory');
+      const code = document.getElementById('matCardCode');
+      const title = document.getElementById('matCardTitle');
+      const desc = document.getElementById('matCardDesc');
+
+      if (img) {
+        img.style.opacity = '0.3';
+        setTimeout(() => {
+          img.src = item.img;
+          cat.innerText = item.cat;
+          code.innerText = item.code;
+          title.innerText = item.title;
+          desc.innerText = item.desc;
+          img.style.opacity = '1';
+        }, 200);
+      }
+    }
+
+    // Shot 3: Color Temperature (Kelvin) Simulator
+    function setLightKelvin(tone) {
+      const overlay = document.getElementById('lightingOverlay');
+      const btnWarm = document.getElementById('btnKelvinWarm');
+      const btnNatural = document.getElementById('btnKelvinNatural');
+
+      if (tone === 'warm') {
+        overlay.className = 'absolute inset-0 bg-amber-500/15 pointer-events-none transition-colors duration-500';
+        btnWarm.className = 'px-3 py-1 rounded-full bg-bronze text-white text-[11px] font-mono';
+        btnNatural.className = 'px-3 py-1 rounded-full bg-sandSurface text-charcoal text-[11px] font-mono';
+      } else {
+        overlay.className = 'absolute inset-0 bg-blue-100/10 pointer-events-none transition-colors duration-500';
+        btnNatural.className = 'px-3 py-1 rounded-full bg-bronze text-white text-[11px] font-mono';
+        btnWarm.className = 'px-3 py-1 rounded-full bg-sandSurface text-charcoal text-[11px] font-mono';
+      }
+    }
+
+    // Shot 5: Smart Renovation Estimator
+    let activeScope = 'full';
+
+    function setScope(type, btn) {
+      activeScope = type;
+      document.querySelectorAll('.scope-btn').forEach(b => {
+        b.classList.remove('border-bronze', 'bg-bronze/10', 'font-bold');
+        b.classList.add('border-borderWarm', 'bg-sandBg/50');
+      });
+      btn.classList.add('border-bronze', 'bg-bronze/10', 'font-bold');
+      btn.classList.remove('border-borderWarm', 'bg-sandBg/50');
+      calcEstimate();
+    }
+
+    function calcEstimate() {
+      const area = parseInt(document.getElementById('shot5AreaRange').value);
+      document.getElementById('shot5AreaDisplay').innerText = `${area.toLocaleString('fa-IR')} مترمربع`;
+
+      let minPerMeter = 9;
+      let maxPerMeter = 14;
+      let days = '۴۵ الی ۶۰ روز کاری';
+
+      if (activeScope === 'mid') {
+        minPerMeter = 5;
+        maxPerMeter = 8;
+        days = '۳۰ الی ۴۰ روز کاری';
+      } else if (activeScope === 'design') {
+        minPerMeter = 0.5;
+        maxPerMeter = 1.1;
+        days = '۱۵ الی ۲۰ روز کاری';
+      }
+
+      const minTotal = ((area * minPerMeter) / 100).toFixed(1);
+      const maxTotal = ((area * maxPerMeter) / 100).toFixed(1);
+
+      document.getElementById('shot5PriceOut').innerText = `${minTotal} الی ${maxTotal} میلیارد تومان`;
+      document.getElementById('shot5TimeOut').innerText = days;
+    }
+
+    function submitLead(e) {
+      e.preventDefault();
+      document.getElementById('leadFeedback').classList.remove('hidden');
+      e.target.reset();
+    }
+
+    // Critique Modal Toggle
+    function toggleCritiqueModal() {
+      const modal = document.getElementById('critiqueModal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+
+    // Ambient Audio Synthesizer (Built with Web Audio API - no external assets)
+    let audioCtx = null;
+    let isPlayingSound = false;
+    let osc1, osc2, gainNode;
+
+    function toggleAmbience() {
+      const icon = document.getElementById('soundIcon');
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      if (!isPlayingSound) {
+        // Create warm subtle ambient drone
+        osc1 = audioCtx.createOscillator();
+        osc2 = audioCtx.createOscillator();
+        gainNode = audioCtx.createGain();
+
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(110, audioCtx.currentTime); // A2 chord
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(165, audioCtx.currentTime); // E3 chord
+
+        gainNode.gain.setValueAtTime(0.015, audioCtx.currentTime); // very subtle
+        osc1.connect(gainNode);
+        osc2.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        osc1.start();
+        osc2.start();
+        isPlayingSound = true;
+        icon.className = 'fa-solid fa-volume-high text-bronze';
+      } else {
+        if (gainNode) gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+        setTimeout(() => {
+          osc1?.stop();
+          osc2?.stop();
+        }, 500);
+        isPlayingSound = false;
+        icon.className = 'fa-solid fa-volume-xmark';
+      }
+    }
+
+    // Live Tehran Clock Updater
+    function updateClock() {
+      const el = document.getElementById('liveTimeClock');
+      if (el) {
+        const d = new Date();
+        const tehranTime = d.toLocaleTimeString('fa-IR', { timeZone: 'Asia/Tehran', hour: '2-digit', minute: '2-digit' });
+        el.innerText = `تهران ${tehranTime}`;
+      }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Initial estimation run
+    calcEstimate();
+  </script>
+
+</body>
+</html>
